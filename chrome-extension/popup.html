@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Data Toolkit</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="box">
+    <h1>Data Toolkit</h1>
+
+    <div class="speeds">
+      <p>Upload Speed: <span id="upload">--</span> Mbps</p>
+      <p>Download Speed: <span id="download">--</span> Mbps</p>
+    </div>
+
+    <div class="calculator">
+      <label>File Size (MB): <input type="number" id="fileSize" /></label>
+      <label>Transfer Type:
+        <select id="transferType">
+          <option value="upload">Upload</option>
+          <option value="download">Download</option>
+        </select>
+      </label>
+      <button id="calcBtn">Calculate</button>
+    </div>
+
+    <div class="results">
+      <p>Estimated Time: <span id="time">--</span></p>
+      <p>Estimated Data: <span id="data">--</span> MB</p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
