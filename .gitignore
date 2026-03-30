@@ -1,0 +1,11 @@
+# Local tool state
+.codex
+
+# Python virtual environment artifacts
+bin/
+include/
+lib/
+lib64
+pyvenv.cfg
+__pycache__/
+*.pyc

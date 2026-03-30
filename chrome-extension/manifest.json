@@ -1,15 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Data Toolkit",
-  "version": "1.0",
-  "description": "Estimate upload/download time and data usage.",
+  "version": "2.0.0",
+  "description": "Internet speed calculator for Chrome with transfer time and data estimates.",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
   "action": {
+    "default_title": "Data Toolkit",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icon.png",
       "48": "icon.png",
       "128": "icon.png"
     }
-  },
-  "permissions": []
+  }
 }

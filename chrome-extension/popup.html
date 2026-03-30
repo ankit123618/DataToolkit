@@ -2,34 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data Toolkit</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="box">
-    <h1>Data Toolkit</h1>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">Chrome Extension</p>
+      <h1>Data Toolkit</h1>
+      <p class="subtitle">Estimate upload and download time using your current or manual speeds.</p>
+    </section>
 
-    <div class="speeds">
-      <p>Upload Speed: <span id="upload">--</span> Mbps</p>
-      <p>Download Speed: <span id="download">--</span> Mbps</p>
-    </div>
+    <section class="panel detected-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-label">Browser Network Hint</p>
+          <p id="connectionStatus" class="panel-value">Checking browser connection...</p>
+        </div>
+        <button id="detectBtn" class="ghost-button" type="button">Refresh Hint</button>
+      </div>
+      <p id="connectionMeta" class="panel-note">A browser hint is useful for download estimation when supported.</p>
+    </section>
 
-    <div class="calculator">
-      <label>File Size (MB): <input type="number" id="fileSize" /></label>
-      <label>Transfer Type:
-        <select id="transferType">
-          <option value="upload">Upload</option>
-          <option value="download">Download</option>
+    <section class="panel grid">
+      <label class="field">
+        <span>File Size</span>
+        <input type="number" id="fileSize" min="0.01" step="0.01" />
+      </label>
+
+      <label class="field">
+        <span>Unit</span>
+        <select id="fileUnit">
+          <option value="MB">MB</option>
+          <option value="GB">GB</option>
         </select>
       </label>
-      <button id="calcBtn">Calculate</button>
-    </div>
 
-    <div class="results">
-      <p>Estimated Time: <span id="time">--</span></p>
-      <p>Estimated Data: <span id="data">--</span> MB</p>
-    </div>
-  </div>
+      <label class="field">
+        <span>Transfer Type</span>
+        <select id="transferType">
+          <option value="download">Download</option>
+          <option value="upload">Upload</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Download Speed (Mbps)</span>
+        <input type="number" id="downloadSpeed" min="0.01" step="0.01" />
+      </label>
+
+      <label class="field">
+        <span>Upload Speed (Mbps)</span>
+        <input type="number" id="uploadSpeed" min="0.01" step="0.01" />
+      </label>
+
+      <label class="field">
+        <span>Overhead (%)</span>
+        <input type="number" id="overheadPercent" min="0" step="0.1" />
+      </label>
+    </section>
+
+    <section class="results-grid">
+      <article class="result-card accent-download">
+        <p class="result-label">Active Speed</p>
+        <p id="activeSpeed" class="result-value">--</p>
+        <p class="result-note">Used for the selected transfer type.</p>
+      </article>
+
+      <article class="result-card accent-time">
+        <p class="result-label">Estimated Time</p>
+        <p id="time" class="result-value">--</p>
+        <p class="result-note">Based on size, speed, and transfer type.</p>
+      </article>
+
+      <article class="result-card accent-data">
+        <p class="result-label">Estimated Data</p>
+        <p id="data" class="result-value">--</p>
+        <p class="result-note">Includes configured transfer overhead.</p>
+      </article>
+    </section>
+  </main>
 
   <script src="popup.js"></script>
 </body>

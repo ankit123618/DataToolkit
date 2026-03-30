@@ -1,0 +1,7 @@
+{
+  "uuid": "data-toolkit@local",
+  "name": "Data Toolkit",
+  "description": "Panel utility for live upload and download speeds with transfer calculations.",
+  "shell-version": ["45", "46", "47", "48", "49"],
+  "version": 1
+}
