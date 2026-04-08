@@ -27,13 +27,13 @@ class DataToolkitIndicator extends PanelMenu.Button {
 
         this._buildPanel();
         this._buildMenu();
-        this._refreshRates();
+        void this._refreshRates();
 
         this._pollId = GLib.timeout_add_seconds(
             GLib.PRIORITY_DEFAULT,
             SAMPLE_INTERVAL_SECONDS,
             () => {
-                this._refreshRates();
+                void this._refreshRates();
                 return GLib.SOURCE_CONTINUE;
             }
         );
@@ -123,7 +123,11 @@ class DataToolkitIndicator extends PanelMenu.Button {
             style_class: 'data-toolkit-entry',
             hint_text: 'Enter size',
         });
-        this._sizeEntry.clutter_text.connect('text-changed', () => this._updateCalculation());
+        this._sizeEntry.clutter_text.connectObject(
+            'text-changed',
+            () => this._updateCalculation(),
+            this
+        );
         controlsBox.add_child(this._sizeEntry);
 
         controlsBox.add_child(new St.Label({
@@ -228,7 +232,7 @@ class DataToolkitIndicator extends PanelMenu.Button {
             can_focus: true,
             style_class: 'data-toolkit-segment-button',
         });
-        button.connect('clicked', callback);
+        button.connectObject('clicked', callback, this);
         return button;
     }
 
@@ -247,11 +251,26 @@ class DataToolkitIndicator extends PanelMenu.Button {
         this._setButtonActive(this._uploadButton, this._transferType === 'upload');
     }
 
-    _readTotals() {
+    async _readTotals() {
         const file = Gio.File.new_for_path('/proc/net/dev');
-        const [ok, contents] = file.load_contents(null);
+        let contents = null;
 
-        if (!ok) {
+        try {
+            contents = await new Promise((resolve, reject) => {
+                file.load_contents_async(null, (source, result) => {
+                    try {
+                        const [ok, bytes] = source.load_contents_finish(result);
+                        resolve(ok ? bytes : null);
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
+            });
+        } catch (error) {
+            return null;
+        }
+
+        if (!contents) {
             return null;
         }
 
@@ -282,8 +301,8 @@ class DataToolkitIndicator extends PanelMenu.Button {
         };
     }
 
-    _refreshRates() {
-        const current = this._readTotals();
+    async _refreshRates() {
+        const current = await this._readTotals();
         if (!current) {
             return;
         }
