@@ -1,11 +1,25 @@
 # Data Toolkit
 
+## V2.0
+
 Data Toolkit now ships as two extensions only:
 
 - A polished Chrome extension for transfer-time calculations
 - A GNOME Shell extension with a top-bar utility for live upload/download speed monitoring and calculations
 
 The old shell script and Python tray launcher were removed so the project stays focused on the two supported interfaces.
+
+<table>
+  <tr>
+    <td width="58%" valign="top">
+      <img src="/media/demo.gif" alt="RFPC demo" />
+    </td>
+    <td width="42%" valign="top">
+      <img src="/media/preview1.png" alt="RFPC screenshot 1" />
+      <img src="/media/preview2.png" alt="RFPC screenshot 1" />
+    </td>
+  </tr>
+</table>
 
 ## What It Does
 
