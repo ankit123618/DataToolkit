@@ -16,7 +16,7 @@ The old shell script and Python tray launcher were removed so the project stays 
     </td>
     <td width="42%" valign="top">
       <img src="/media/preview1.png" alt="RFPC screenshot 1" />
-      <img src="/media/preview2.png" alt="RFPC screenshot 1" />
+      <!-- <img src="/media/preview2.png" alt="RFPC screenshot 1" /> -->
     </td>
   </tr>
 </table>
